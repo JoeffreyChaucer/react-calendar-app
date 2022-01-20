@@ -1,10 +1,13 @@
 import Main from './components/Main';
 import './App.css';
+import AppState from './context/App/AppState';
 
 function App() {
   return (
     <>
-      <Main />
+      <AppState>
+        <Main />
+      </AppState>
     </>
   );
 }
