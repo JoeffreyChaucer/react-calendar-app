@@ -5,7 +5,7 @@ import Calendar from './calendar/Calendar.js';
 
 const Main = (props) => {
   return (
-    <div className='wrapper'>
+    <div className='wrapper d-flex justify-content-center align-items-center'>
       <div className='container-fluid'>
         <div className='row'>
           <div className='col-12'>
