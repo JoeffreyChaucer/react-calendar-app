@@ -1,7 +1,7 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import moment from 'moment';
 const EventForm = (props) => {
   const {
     modalId,
@@ -48,7 +48,8 @@ const EventForm = (props) => {
                   onChange={inputChange}
                 />
               </div>
-              <div className='form-check'>
+
+              <div className='form-check my-1'>
                 <input
                   type='checkbox'
                   className='form-check-input'
@@ -72,16 +73,20 @@ const EventForm = (props) => {
                         className='form-control'
                         showTimeSelect
                         timeFormat='p'
-                        timeIntervals={1}
+                        timeIntervals={30}
                         dateFormat='Pp'
                         selected={startDate}
                         onChange={onInputChange('startDate')}
+                        minDate={moment().toDate()}
+                        excludeOutOfBoundsTime
                       />
                     ) : (
                       <DatePicker
                         className='form-control'
+                        timeIntervals={30}
                         selected={startDate}
                         onChange={onInputChange('startDate')}
+                        minDate={moment().toDate()}
                       />
                     )}
                   </div>
@@ -96,16 +101,20 @@ const EventForm = (props) => {
                         className='form-control'
                         showTimeSelect
                         timeFormat='p'
-                        timeIntervals={1}
+                        timeIntervals={30}
                         dateFormat='Pp'
                         selected={endDate}
                         onChange={onInputChange('endDate')}
+                        minDate={moment().toDate()}
+                        excludeOutOfBoundsTime
                       />
                     ) : (
                       <DatePicker
                         className='form-control'
+                        timeIntervals={30}
                         selected={endDate}
                         onChange={onInputChange('endDate')}
+                        minDate={moment().toDate()}
                       />
                     )}
                   </div>

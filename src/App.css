@@ -76,5 +76,6 @@ button:focus {
   color: #212529;
   background-clip: padding-box;
   border-radius: 0.2rem;
+  margin-bottom: 0.2rem;
   outline: 0;
 }

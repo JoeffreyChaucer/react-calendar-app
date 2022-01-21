@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import EventForm from './EventForm';
 import moment from 'moment';
+import AppContext from '../../context/App/appContext';
 
 const AddEvent = () => {
   const [eventName, setEventName] = useState('');
@@ -9,7 +10,10 @@ const AddEvent = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [color, setColor] = useState('Primary');
-  const colors = ['Primary', 'Danger', 'Success', 'Info', 'Warning'];
+
+  const appContext = useContext(AppContext);
+  const { addEvent, events, colors } = appContext;
+
   const colorObj = {
     primary: '#0275d8',
     success: '#5cb85c',
@@ -54,8 +58,8 @@ const AddEvent = () => {
   };
 
   const createEvent = () => {
-    const event = setEvent(1);
-    console.log(event);
+    const event = setEvent(events.length + 1);
+    addEvent(event);
     reset();
   };
 
