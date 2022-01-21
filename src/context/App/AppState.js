@@ -3,7 +3,7 @@ import React, { useReducer } from 'react';
 import AppReducer from './appReducer';
 import AppContext from './appContext';
 
-import { ADD_EVENT } from '../types.js';
+import { ADD_EVENT, GET_EVENTS } from '../types.js';
 
 import { useLocalStorage } from '../../hooks/storage';
 
@@ -27,6 +27,15 @@ const AppState = (props) => {
     });
   };
 
+  const getEvents = () => {
+    if (item) {
+      dispatch({
+        type: GET_EVENTS,
+        payload: item,
+      });
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -34,6 +43,7 @@ const AppState = (props) => {
         colors: state.colors,
         selectedEvent: state.selectedEvent,
         addEvent,
+        getEvents,
       }}
     >
       {props.children}
