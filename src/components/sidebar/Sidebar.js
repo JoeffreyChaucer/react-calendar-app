@@ -3,6 +3,8 @@ import AddEvent from '../modal/AddEvent';
 import AppContext from '../../context/App/appContext';
 import SelectModal from '../modal/SelectModal';
 
+import EditEvent from '../modal/EditEvent';
+
 const Sidebar = () => {
   const appContext = useContext(AppContext);
   const { events, selected } = appContext;
@@ -38,6 +40,7 @@ const Sidebar = () => {
       </div>
       <AddEvent />
       <SelectModal />
+      <EditEvent />
     </div>
   );
 };

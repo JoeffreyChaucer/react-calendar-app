@@ -79,3 +79,8 @@ button:focus {
   margin-bottom: 0.2rem;
   outline: 0;
 }
+
+select > option {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}

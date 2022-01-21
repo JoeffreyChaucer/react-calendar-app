@@ -24,7 +24,13 @@ const SelectModal = () => {
                 Delete Event
               </button>
               <div className='col-auto'> or</div>
-              <button type='button' className='col-auto btn btn-primary'>
+              <button
+                type='button'
+                className='col-auto btn btn-primary'
+                data-bs-toggle='modal'
+                data-bs-target='#edit-event'
+                data-bs-dismiss='modal'
+              >
                 Edit Event
               </button>
             </div>
