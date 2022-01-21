@@ -1,4 +1,4 @@
-import { ADD_EVENT, GET_EVENTS } from '../types.js';
+import { ADD_EVENT, GET_EVENTS, SELECT_EVENT } from '../types.js';
 
 //eslint-disable-next-line
 export default (state, action) => {
@@ -12,6 +12,12 @@ export default (state, action) => {
       return {
         ...state,
         events: action.payload,
+      };
+
+    case SELECT_EVENT:
+      return {
+        ...state,
+        selectedEvent: action.payload,
       };
     default:
       return state;
