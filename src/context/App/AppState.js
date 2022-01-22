@@ -78,10 +78,6 @@ const AppState = (props) => {
       type: DELETE_EVENT,
       payload: newEventsArray,
     });
-    dispatch({
-      type: SELECT_EVENT,
-      payload: {},
-    });
   };
 
   return (
