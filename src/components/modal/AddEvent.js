@@ -5,6 +5,7 @@ import AppContext from '../../context/App/appContext';
 
 const AddEvent = () => {
   const [eventName, setEventName] = useState('');
+  const [description, setDescription] = useState('');
   const [checkBox, setCheckBox] = useState(false);
   const [showTime, setShowTime] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
@@ -19,7 +20,13 @@ const AddEvent = () => {
   };
 
   const inputChange = (e) => {
-    setEventName(e.target.value);
+    const attributeName = e.target.getAttribute('name');
+    if (attributeName === 'event-name') {
+      setEventName(e.target.value);
+    }
+    if (attributeName === 'description') {
+      setDescription(e.target.value);
+    }
   };
 
   const onCheckBoxChange = (e) => {
@@ -69,6 +76,7 @@ const AddEvent = () => {
     const event = {
       id,
       title: eventName,
+      description,
       start,
       end,
       allDay: checkBox,
@@ -82,6 +90,7 @@ const AddEvent = () => {
   const reset = () => {
     setColor('');
     setEventName('');
+    setDescription('');
     setCheckBox(false);
     setShowTime(false);
     setStartDate(new Date());
@@ -93,6 +102,7 @@ const AddEvent = () => {
       <EventForm
         modalId='add-event'
         title='Add Event'
+        description={description}
         closeModal={closeModal}
         eventName={eventName}
         inputChange={inputChange}

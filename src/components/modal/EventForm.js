@@ -6,6 +6,7 @@ const EventForm = (props) => {
   const {
     modalId,
     title,
+    description,
     closeModal,
     eventName,
     inputChange,
@@ -46,6 +47,19 @@ const EventForm = (props) => {
                   placeholder='Enter Title'
                   name='event-name'
                   value={eventName}
+                  onChange={inputChange}
+                />
+              </div>
+              <div className='form-group'>
+                <label className='control-label'>Description</label>
+                <textarea
+                  className='form-control'
+                  placeholder='Enter description'
+                  type='text'
+                  name='description'
+                  cols='30'
+                  rows='10'
+                  value={description}
                   onChange={inputChange}
                 />
               </div>
