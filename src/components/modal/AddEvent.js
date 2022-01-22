@@ -63,14 +63,12 @@ const AddEvent = () => {
   };
 
   const setEvent = (id) => {
-    let start = '';
+    const start = moment(startDate).format();
     let end = '';
     if (!checkBox) {
-      start = moment(startDate).format().toString();
-      end = moment(endDate).format().toString();
+      end = moment(endDate).format();
     } else {
-      start = moment(startDate).format('YYYY-MM-DD').toString();
-      end = moment(endDate).format('YYYY-MM-DD').toString();
+      end = moment(endDate).format('YYYY-MM-DD');
     }
 
     const event = {

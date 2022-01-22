@@ -83,27 +83,17 @@ const EventForm = (props) => {
 
                 <div className='row g-3'>
                   <div className='col-auto'>
-                    {!showTime ? (
-                      <DatePicker
-                        className='form-control'
-                        showTimeSelect
-                        timeFormat='p'
-                        timeIntervals={30}
-                        dateFormat='Pp'
-                        selected={startDate}
-                        onChange={onInputChange('startDate')}
-                        minDate={moment().toDate()}
-                        excludeOutOfBoundsTime
-                      />
-                    ) : (
-                      <DatePicker
-                        className='form-control'
-                        timeIntervals={30}
-                        selected={startDate}
-                        onChange={onInputChange('startDate')}
-                        minDate={moment().toDate()}
-                      />
-                    )}
+                    <DatePicker
+                      className='form-control'
+                      showTimeSelect
+                      timeFormat='p'
+                      timeIntervals={30}
+                      dateFormat='Pp'
+                      selected={startDate}
+                      onChange={onInputChange('startDate')}
+                      minDate={moment().toDate()}
+                      excludeOutOfBoundsTime
+                    />
                   </div>
                 </div>
               </div>

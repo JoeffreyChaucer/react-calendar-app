@@ -34,6 +34,7 @@ const Calendar = () => {
           }}
           events={events}
           eventClick={handleEventClick}
+          dayMaxEventRows={3}
         />
       </div>
     </div>

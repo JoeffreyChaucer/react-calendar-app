@@ -22,20 +22,14 @@ const EditEvent = () => {
       setEventName(selectedEvent.title);
       setDescription(selectedEvent.description);
       setCheckBox(selectedEvent.allDay);
-      let start = '';
+      const start = moment(new Date(selectedEvent.start)).format();
       let end = '';
       if (!selectedEvent.allDay) {
         setShowTime(false);
-        start = moment(new Date(selectedEvent.start)).format().toString();
-        end = moment(new Date(selectedEvent.end)).format().toString();
+        end = moment(new Date(selectedEvent.end)).format();
       } else {
         setShowTime(true);
-        start = moment(new Date(selectedEvent.start))
-          .format('YYYY-MM-DD')
-          .toString();
-        end = moment(new Date(selectedEvent.end))
-          .format('YYYY-MM-DD')
-          .toString();
+        end = moment(new Date(selectedEvent.end)).format('YYYY-MM-DD');
       }
       setStartDate(new Date(start));
       setEndDate(new Date(end));
@@ -82,14 +76,12 @@ const EditEvent = () => {
   };
 
   const setEvent = (id) => {
-    let start = '';
+    const start = moment(startDate).format();
     let end = '';
     if (!checkBox) {
-      start = moment(startDate).format().toString();
-      end = moment(endDate).format().toString();
+      end = moment(endDate).format();
     } else {
-      start = moment(startDate).format('YYYY-MM-DD').toString();
-      end = moment(endDate).format('YYYY-MM-DD').toString();
+      end = moment(endDate).format('YYYY-MM-DD');
     }
 
     const event = {
