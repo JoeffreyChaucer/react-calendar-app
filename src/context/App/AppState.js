@@ -3,7 +3,13 @@ import React, { useReducer } from 'react';
 import AppReducer from './appReducer';
 import AppContext from './appContext';
 
-import { ADD_EVENT, EDIT_EVENT, GET_EVENTS, SELECT_EVENT } from '../types.js';
+import {
+  ADD_EVENT,
+  DELETE_EVENT,
+  EDIT_EVENT,
+  GET_EVENTS,
+  SELECT_EVENT,
+} from '../types.js';
 
 import { useLocalStorage } from '../../hooks/storage';
 
@@ -64,6 +70,20 @@ const AppState = (props) => {
     });
   };
 
+  const deleteSelectedEvents = (event) => {
+    const newEventsArray = item.filter((e) => e.id !== event.id);
+    setValue(newEventsArray);
+
+    dispatch({
+      type: DELETE_EVENT,
+      payload: newEventsArray,
+    });
+    dispatch({
+      type: SELECT_EVENT,
+      payload: {},
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -75,6 +95,7 @@ const AppState = (props) => {
         getEvents,
         selected,
         editSelectedEvents,
+        deleteSelectedEvents,
       }}
     >
       {props.children}
