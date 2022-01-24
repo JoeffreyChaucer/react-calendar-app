@@ -8,8 +8,8 @@ const AddEvent = () => {
   const [description, setDescription] = useState('');
   const [checkBox, setCheckBox] = useState(false);
   const [showTime, setShowTime] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(moment().toDate());
+  const [endDate, setEndDate] = useState(moment().toDate());
   const [color, setColor] = useState('Primary');
 
   const appContext = useContext(AppContext);

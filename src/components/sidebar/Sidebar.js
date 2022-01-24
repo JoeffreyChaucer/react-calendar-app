@@ -26,7 +26,7 @@ const Sidebar = () => {
           {events.length > 0
             ? events.map((event, index) => (
                 <div
-                  className={`rounded-2 external-event bg-${event.bgColor}`}
+                  className={`rounded-2 external-event bg-${event.bgColor.toLowerCase()}`}
                   key={event.id + index}
                   onClick={() => selected(event)}
                   data-bs-toggle='modal'

@@ -3,10 +3,10 @@ import AppContext from '../../context/App/appContext';
 
 const SelectModal = () => {
   const appContext = useContext(AppContext);
-  const { selectedEvent, deleteSelectedEvents, selected } = appContext;
+  const { selectedEvent, deleteSelectedEvent, selected } = appContext;
 
   const deleteSelected = (event) => {
-    deleteSelectedEvents(event);
+    deleteSelectedEvent(event);
     selected({});
   };
 
@@ -34,6 +34,7 @@ const SelectModal = () => {
                 Delete Event
               </button>
               <div className='col-auto'> or</div>
+
               <button
                 type='button'
                 className='col-auto btn btn-primary'

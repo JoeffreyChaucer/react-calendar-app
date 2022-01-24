@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 
 import AppReducer from './appReducer';
 import AppContext from './appContext';
+import _ from 'lodash';
 
 import {
   ADD_EVENT,
@@ -9,6 +10,8 @@ import {
   EDIT_EVENT,
   GET_EVENTS,
   SELECT_EVENT,
+  ACTIVE_EVENTS,
+  GET_ACTIVE_EVENTS,
 } from '../types.js';
 
 import { useLocalStorage } from '../../hooks/storage';
@@ -18,6 +21,7 @@ const AppState = (props) => {
     events: [],
     colors: ['Primary', 'Danger', 'Success', 'Info', 'Warning'],
     selectedEvent: {},
+    activeCalendarEvents: [],
     colorObj: {
       primary: '#0275d8',
       success: '#5cb85c',
@@ -29,8 +33,29 @@ const AppState = (props) => {
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const [item, setValue] = useLocalStorage('events');
-  //eslint-disable-next-line
-  const [selectedItem, setSelectedItem] = useLocalStorage('selectedEvent');
+  const [, setSelectedItem] = useLocalStorage('selectedEvent');
+  const [active, setActiveEvents] = useLocalStorage('activeCalendarEvents');
+  const [, setToastActiveEvent] = useLocalStorage('toastActiveEvent');
+  // Get active calendar events
+  const getActiveEvents = () => {
+    if (active) {
+      dispatch({
+        type: GET_ACTIVE_EVENTS,
+        payload: active,
+      });
+    }
+  };
+  // Set due events
+  const activeEvents = (event) => {
+    let calendarEvents = [...state.activeCalendarEvents];
+    calendarEvents.push(event);
+    const activeEventsArray = _.uniqBy(calendarEvents, 'id');
+    setActiveEvents(activeEventsArray);
+    dispatch({
+      type: ACTIVE_EVENTS,
+      payload: activeEventsArray,
+    });
+  };
 
   const addEvent = (event) => {
     let userEvents = [...state.events];
@@ -42,6 +67,7 @@ const AppState = (props) => {
     });
   };
 
+  // Get all events from storage
   const getEvents = () => {
     if (item) {
       dispatch({
@@ -59,7 +85,7 @@ const AppState = (props) => {
     });
   };
 
-  const editSelectedEvents = (event) => {
+  const editSelectedEvent = (event) => {
     const newEvents = item.map((e) => {
       return e.id === event.id ? event : e;
     });
@@ -70,14 +96,22 @@ const AppState = (props) => {
     });
   };
 
-  const deleteSelectedEvents = (event) => {
+  const deleteSelectedEvent = (event) => {
     const newEventsArray = item.filter((e) => e.id !== event.id);
     setValue(newEventsArray);
-
     dispatch({
       type: DELETE_EVENT,
       payload: newEventsArray,
     });
+
+    const activeEventsArray = active.filter((e) => e.id !== event.id);
+    setActiveEvents(activeEventsArray);
+    dispatch({
+      type: ACTIVE_EVENTS,
+      payload: activeEventsArray,
+    });
+
+    setToastActiveEvent({});
   };
 
   return (
@@ -86,12 +120,15 @@ const AppState = (props) => {
         events: state.events,
         colors: state.colors,
         selectedEvent: state.selectedEvent,
+        activeCalendarEvents: state.activeCalendarEvents,
         colorObj: state.colorObj,
         addEvent,
         getEvents,
         selected,
-        editSelectedEvents,
-        deleteSelectedEvents,
+        editSelectedEvent,
+        deleteSelectedEvent,
+        activeEvents,
+        getActiveEvents,
       }}
     >
       {props.children}

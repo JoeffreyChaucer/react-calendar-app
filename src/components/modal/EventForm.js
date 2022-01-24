@@ -87,7 +87,7 @@ const EventForm = (props) => {
                       className='form-control'
                       showTimeSelect
                       timeFormat='p'
-                      timeIntervals={30}
+                      timeIntervals={1}
                       dateFormat='Pp'
                       selected={startDate}
                       onChange={onInputChange('startDate')}

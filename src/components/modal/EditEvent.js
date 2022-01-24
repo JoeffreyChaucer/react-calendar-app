@@ -8,12 +8,12 @@ const EditEvent = () => {
   const [description, setDescription] = useState('');
   const [checkBox, setCheckBox] = useState(false);
   const [showTime, setShowTime] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(moment().toDate());
+  const [endDate, setEndDate] = useState(moment().toDate());
   const [color, setColor] = useState('Primary');
 
   const appContext = useContext(AppContext);
-  const { events, colors, selectedEvent, colorObj, editSelectedEvents } =
+  const { events, colors, selectedEvent, colorObj, editSelectedEvent } =
     appContext;
 
   useEffect(() => {
@@ -22,20 +22,21 @@ const EditEvent = () => {
       setEventName(selectedEvent.title);
       setDescription(selectedEvent.description);
       setCheckBox(selectedEvent.allDay);
-      const start = moment(new Date(selectedEvent.start)).format();
+      const start = `${moment(new Date(selectedEvent.start)).format()}`;
       let end = '';
       if (!selectedEvent.allDay) {
         setShowTime(false);
-        end = moment(new Date(selectedEvent.end)).format();
+        end = `${moment(new Date(selectedEvent.end)).format()}`;
       } else {
         setShowTime(true);
-        end = moment(new Date(selectedEvent.end)).format('YYYY-MM-DD');
+        end = `${moment(new Date(selectedEvent.end)).format('YYYY-MM-DD')}`;
       }
       setStartDate(new Date(start));
       setEndDate(new Date(end));
     }
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, [selectedEvent, events]);
+
   const closeModal = () => {};
 
   const inputChange = (e) => {
@@ -76,12 +77,12 @@ const EditEvent = () => {
   };
 
   const setEvent = (id) => {
-    const start = moment(startDate).format();
+    const start = `${moment(startDate).format()}`;
     let end = '';
     if (!checkBox) {
-      end = moment(endDate).format();
+      end = `${moment(startDate).format()}`;
     } else {
-      end = moment(endDate).format('YYYY-MM-DD');
+      end = `${moment(startDate).format('YYYY-MM-DD')}`;
     }
 
     const event = {
@@ -100,7 +101,7 @@ const EditEvent = () => {
 
   const editEvent = () => {
     const event = setEvent(selectedEvent.id);
-    editSelectedEvents(event);
+    editSelectedEvent(event);
   };
 
   return (
